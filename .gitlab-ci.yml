@@ -1,0 +1,11 @@
+stages:
+  - package
+
+PackageTagJob:
+  stage: package
+  only: 
+    - tags
+  script: 
+     - curl -f -L -o ./Package.zip http://git.guahao-inc.com/iOS-Libary/WYLibs/raw/master/Script/Package.zip?private_token=VwxFgeeuodt5y8HXS-_g --create-dirs --netrc-optional
+     - unzip -o Package.zip
+     - bash ./Package/packageShell.sh -u -t -l -v $CI_BUILD_TAG
